@@ -12,9 +12,9 @@
         <label>@card.suite</label>
         <label>@card.rarity</label>
     }
-    <button onclick="drawCard('PlayerNormalDraw')">Normal</button>
-    <button onclick="drawCard('PlayerEvilDraw')">Evil</button>
-    <button onclick="drawCard('PlayerBonusDraw')">Bonus</button>
+    <button id="norm" onclick="drawCard('PlayerNormalDraw')">Normal</button>
+    <button id="evil" onclick="drawCard('PlayerEvilDraw')">Evil</button>
+    <button id="bonus" onclick="drawCard('PlayerBonusDraw')">Bonus</button>
 
     <script>
         async function drawCard(action) {

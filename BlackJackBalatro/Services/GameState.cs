@@ -13,6 +13,8 @@ namespace BlackJackBalatro.Services
         public int CurrentPlayerPoints { get; set; }
         public int CurrentComputerPoints { get; set; }
         public int CompAces { get; set; }
+        public bool isPlayerWin { get; set; }
+        public int bet { get; set; }
 
         public Player Player { get; set; }
 
@@ -26,6 +28,8 @@ namespace BlackJackBalatro.Services
             CurrentPlayerPoints = 0;
             CurrentComputerPoints = 0;
             CompAces = 0;
+            isPlayerWin = false;
+            bet = 0;
 
             NormalCard.initializeDeck(NormalDeck);
             EvilCard.initializeDeck(EvilDeck);
@@ -71,7 +75,7 @@ namespace BlackJackBalatro.Services
             {
                 CurrentComputerPoints += adder;
 
-                while (CurrentPlayerPoints > 21 && Player.aces > 0)
+                while (CurrentComputerPoints > 21 && CompAces > 0)
                 {
                     CurrentPlayerPoints -= 10;
                     Player.aces--;
