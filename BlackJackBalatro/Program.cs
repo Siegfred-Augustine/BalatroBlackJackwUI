@@ -1,3 +1,5 @@
+using BlackJackBalatro.Services;
+
 namespace BlackJackBalatro
 {
     public class Program
@@ -8,6 +10,7 @@ namespace BlackJackBalatro
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<GameState>();
 
             var app = builder.Build();
 

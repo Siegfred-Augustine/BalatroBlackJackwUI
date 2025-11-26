@@ -1,0 +1,32 @@
+﻿body {
+    border: solid 2px;
+    border-color: red;
+}
+#game-area{
+    display: flex;
+}
+#play-area {
+    width: 85%;
+    border: solid 2px;
+    border-color: green;
+    display: flex;
+    flex-direction: column;
+}
+#comp-area {
+    border: solid 2px;
+    border-color: yellow;
+}
+#player-area {
+    border: solid 2px;
+    border-color: orange;
+}
+#inventory {
+    border: solid 2px;
+    border-color: blue;
+}
+#stat-area {
+    width: 10%;
+    border: solid 2px;
+    border-color: violet;
+}
+

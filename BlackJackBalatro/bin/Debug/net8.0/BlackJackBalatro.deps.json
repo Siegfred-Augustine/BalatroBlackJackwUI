@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "BlackJackBalatro/1.0.0": {
+        "runtime": {
+          "BlackJackBalatro.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BlackJackBalatro/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

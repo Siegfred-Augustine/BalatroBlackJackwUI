@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "BBJ";
+}
+@model BlackJackBalatro.Services.GameState
+
+<div class="text-center">
+    <h1 class="display-4">Game</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div id="game-area">
+        <div id="play-area">
+            <button onclick="gameStart()">Start Game</button>
+            <div id="comp-area">
+                @await Html.PartialAsync("Computerhand", @Model);
+            </div>
+        
+            <div id="player-area">
+                @await Html.PartialAsync("PlayerHand", @Model);
+            </div>
+
+        </div>
+        
+            <div id="inventory">
+                @await Html.PartialAsync("Inventory", @Model);
+            </div>
+            <div id="stat-area">
+                @await Html.PartialAsync("Stats", @Model);
+            </div>
+    </div>
+</div>
+<script>
+    async function gameStart(){
+        for(let i = 0; i<2; i++){
+            const chtml = await fetch(`/Deck/ComputerDraw`);
+            const phtml = await fetch(`/Deck/PlayerNormalDraw`);
+
+            document.getElementById("comp-area").innerHTML = await chtml.text();
+            document.getElementById("player-area").innerHTML = await phtml.text();
+        }
+    }
+</script>

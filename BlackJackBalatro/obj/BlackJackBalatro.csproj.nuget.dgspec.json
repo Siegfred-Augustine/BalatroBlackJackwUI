@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "\\\\wsl.localhost\\Ubuntu\\home\\rhomer\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj": {}
+    "D:\\linux_assets\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj": {}
   },
   "projects": {
-    "\\\\wsl.localhost\\Ubuntu\\home\\rhomer\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj": {
+    "D:\\linux_assets\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\wsl.localhost\\Ubuntu\\home\\rhomer\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj",
+        "projectUniqueName": "D:\\linux_assets\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj",
         "projectName": "BlackJackBalatro",
-        "projectPath": "\\\\wsl.localhost\\Ubuntu\\home\\rhomer\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj",
+        "projectPath": "D:\\linux_assets\\BalatroBlackJackwUI\\BlackJackBalatro\\BlackJackBalatro.csproj",
         "packagesPath": "C:\\Users\\rhomer\\.nuget\\packages\\",
-        "outputPath": "\\\\wsl.localhost\\Ubuntu\\home\\rhomer\\BalatroBlackJackwUI\\BlackJackBalatro\\obj\\",
+        "outputPath": "D:\\linux_assets\\BalatroBlackJackwUI\\BlackJackBalatro\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

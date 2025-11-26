@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("c76b7c66-4b83-4b5d-ad1e-446618a0e4cc")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlackJackBalatro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b487b2c486b9915c761e8c00b279503265132e31")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2ee91932674292ed507e00ab551392a62fe1a55")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlackJackBalatro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlackJackBalatro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
