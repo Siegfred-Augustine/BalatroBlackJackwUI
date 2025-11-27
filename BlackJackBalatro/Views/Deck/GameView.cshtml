@@ -3,21 +3,32 @@
 }
 @model BlackJackBalatro.Services.GameState
 
-<div class="text-center">
+<div id="GameView" class="text-center">
     <h1 class="display-4">Game</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <div id="game-area">
         <div id="play-area">
             <button id="start" onclick="gameStart()">Start Game</button>
             <div id="comp-area">
                 @await Html.PartialAsync("Computerhand", @Model);
             </div>
-        
             <div id="player-area">
-                @await Html.PartialAsync("PlayerHand", @Model);
-            </div>
-            <button id="standButton" onclick="stand()">Stand</button>
+                @if (@Model.canPlayerDraw)
+                {
+                
+                    @await Html.PartialAsync("PlayerHand", @Model)
+                    ;
 
+                }
+                else if(!@Model.canPlayerDraw && @Model.isPlayerWin || @Model.CurrentPlayerPoints == 21)
+                {
+                    @await Html.PartialAsync("WinScreen", @Model)
+                }
+                else if(!@Model.isPlayerWin && !@Model.canPlayerDraw )
+                {
+                        @await Html.PartialAsync("LoseScreen", @Model);
+                }
+             </div>
+            <button id="standButton" onclick="stand()">Stand</button>
         </div>
         
             <div id="inventory">
@@ -28,33 +39,5 @@
             </div>
     </div>
 </div>
-<script>
-    async function gameStart(){
-        document.getElementById("start").disabled = true;
-        for(let i = 0; i<2; i++){
-            
-            const chtml = await fetch(`/Deck/ComputerDraw`);
-            const phtml = await fetch(`/Deck/PlayerNormalDraw`);
-
-            document.getElementById("comp-area").innerHTML = await chtml.text();
-            document.getElementById("player-area").innerHTML = await phtml.text();
-
-            document.getElementById("standButton").disabled = false;
-        }
-    }
-    async function stand(){
-
-        document.getElementById("start").disabled = false;
-        document.getElementById("standButton").disabled = true;
-        document.getElementById("norm").disabled = true;
-        document.getElementById("evil").disabled = true;
-        document.getElementById("bonus").disabled = true;
-
-        const html = await fetch(`/Deck/ComputerTurn`);
-        document.getElementById("comp-area").innerHTML = await html.text();
-
-        const phtml = await fetch(`/Deck/PlayerAreaRefresh`);
-        document.getElementById("player-area").innerHTML = await phtml.text();
-
-    }
+<script src="~/js/scripts.js" asp-append-version="true">
 </script>

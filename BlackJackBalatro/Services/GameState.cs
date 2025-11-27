@@ -14,6 +14,7 @@ namespace BlackJackBalatro.Services
         public int CurrentComputerPoints { get; set; }
         public int CompAces { get; set; }
         public bool isPlayerWin { get; set; }
+        public bool canPlayerDraw { get; set; }
         public int bet { get; set; }
 
         public Player Player { get; set; }
@@ -28,6 +29,7 @@ namespace BlackJackBalatro.Services
             CurrentPlayerPoints = 0;
             CurrentComputerPoints = 0;
             CompAces = 0;
+            canPlayerDraw = true;
             isPlayerWin = false;
             bet = 0;
 
@@ -36,6 +38,18 @@ namespace BlackJackBalatro.Services
             BonusCard.initializeDeck(BonusDeck);
 
             Player = new Player("");
+        }
+        public void resetGame()
+        {
+            bet = 0;
+            CurrentPlayerHand.Clear();
+            CurrentPlayerPoints = 0;
+            CurrentCompHand.Clear();
+            CurrentComputerPoints = 0;
+            CompAces = 0;
+            Player.aces = 0;
+            isPlayerWin = false;
+            canPlayerDraw = true;
         }
         public void AddPoints(Card card, bool isPlayer)
         {

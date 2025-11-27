@@ -2,8 +2,11 @@
     border: solid 2px;
     border-color: red;
 }
-#game-area{
+#game-area {
     display: flex;
+    border: solid 2px;
+    border-color: pink;
+    width: 100%;
 }
 #play-area {
     width: 85%;
@@ -11,14 +14,18 @@
     border-color: green;
     display: flex;
     flex-direction: column;
+    height: 75vh;
 }
+
 #comp-area {
     border: solid 2px;
     border-color: yellow;
+    height:50%;
 }
 #player-area {
     border: solid 2px;
     border-color: orange;
+    height: 50%;
 }
 #inventory {
     border: solid 2px;

@@ -3,8 +3,19 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <input type="text" placeholder="Default Name"/>
-    <a class="btn" asp-action="GameView" asp-controller="Deck">Play</a>
+    <h1 class="display-4">Welcome to BlackJack</h1>
+
+    <input id="playerName" type="text" placeholder="Default Name" />
+
+    <a id="playBtn" class="btn" asp-action="GameView" asp-controller="Deck">Play</a>
 </div>
+
+<script>
+    document.getElementById("playBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        let name = document.getElementById("playerName").value || "Default Name";
+
+        window.location.href = `/Deck/GameView?playerName=${encodeURIComponent(name)}`;
+    });
+</script>

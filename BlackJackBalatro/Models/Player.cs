@@ -11,11 +11,11 @@ namespace BlackJackBalatro.Models
     {
         public String name = "Default Name";
         public int score = 0; //tracks the score of the player.
-        public int chips = 0; //tracks players' current chips
+        public int chips = 100; //tracks players' current chips
         public int cardDraws = 0; //tracks total cards drawn by the player.
         public int evilDraws = 0; //tracks evil cards drawn.
         public int specialDraws = 0; //tracks special cards drawn.
-        public int multiplier = 1; //multiplier for chip rewards.
+        public int multiplier = 2; //multiplier for chip rewards.
         public int diamondDraws = 0; //can be added for a bonus.
         public int heartDraws = 0; //can be added for a bonus.
         public int spadeDraws = 0; //can be added for a bonus.

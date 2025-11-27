@@ -4,9 +4,16 @@
 @{
 }
 @model BlackJackBalatro.Services.GameState
+<div id="statDiv">
 <div>
     <h2>Stats</h2>
-    <label asp-for="Player.name">@Model.Player.name</label>
-    <label asp-for="Player.blackJacks">@Model.Player.blackJacks</label>
-    <label asp-for="Player.aces">@Model.Player.aces</label>
+
+    <label>Name: @Model.Player.name</label><br />
+    <label>Chips: @Model.Player.chips</label><br />
+    <label>Multiplier: @Model.Player.multiplier</label><br />
+    <label>CurrentPoints: @Model.CurrentPlayerPoints</label><br />
+    <label>CurrentComPoints: @Model.CurrentComputerPoints</label><br />
+    <label>Round Bet: @Model.bet</label><br />
+    
+</div>
 </div>

@@ -12,8 +12,9 @@ namespace BlackJackBalatro.Controllers
             _gameState = game;
         }
 
-        public IActionResult GameView()
+        public IActionResult GameView(String playerName)
         {
+            _gameState.Player.name = playerName;
             return View(_gameState);
         }
         public IActionResult PlayerNormalDraw()
@@ -21,6 +22,7 @@ namespace BlackJackBalatro.Controllers
             if (_gameState.CurrentPlayerPoints > 21)
             {
                 _gameState.isPlayerWin = false;
+                _gameState.canPlayerDraw = false;
                 _gameState.CurrentPlayerPoints = 0;
             }
             else
@@ -29,8 +31,13 @@ namespace BlackJackBalatro.Controllers
 
                 _gameState.AddPoints(card, true);
             }
-
-                return PartialView("PlayerHand", _gameState);
+            if(_gameState.CurrentPlayerPoints > 21)
+            {
+                _gameState.isPlayerWin = false;
+                _gameState.canPlayerDraw = false;
+                return PartialView("LoseScreen", _gameState);
+            }
+            return PartialView("PlayerHand", _gameState);
         }
         public IActionResult PlayerEvilDraw()
         {
@@ -44,7 +51,12 @@ namespace BlackJackBalatro.Controllers
                 Card card = DrawLogic(_gameState.CurrentPlayerHand, _gameState.EvilDeck);
                 _gameState.AddPoints(card, true);
             }
-
+            if(_gameState.CurrentPlayerPoints > 21)
+            {
+                _gameState.isPlayerWin = false;
+                _gameState.canPlayerDraw = false;
+                return PartialView("LoseScreen", _gameState);
+            }
             return PartialView("PlayerHand", _gameState);
         }
         public IActionResult PlayerBonusDraw()
@@ -60,13 +72,16 @@ namespace BlackJackBalatro.Controllers
                 Card card = DrawLogic(_gameState.CurrentPlayerHand, _gameState.BonusDeck);
                 _gameState.AddPoints(card, true);
             }
+            if (_gameState.CurrentPlayerPoints > 21)
+            {
+                _gameState.isPlayerWin = false;
+                _gameState.canPlayerDraw = false;
+                return PartialView("LoseScreen", _gameState);
+            }
+                
+            return PartialView("PlayerHand", _gameState);
+        }
 
-            return PartialView("PlayerHand", _gameState);
-        }
-        public IActionResult PlayerAreaRefresh()
-        {
-            return PartialView("PlayerHand", _gameState);
-        }
         public IActionResult ComputerDraw()
         {
             if(_gameState.CurrentComputerPoints > 21)
@@ -97,32 +112,62 @@ namespace BlackJackBalatro.Controllers
             {
                 ComputerDraw();
             }
+            if(_gameState.CurrentComputerPoints > 21)
+            {
+                _gameState.CurrentComputerPoints = 0;
+            }
             isRoundWin(_gameState);
             return PartialView("ComputerHand", _gameState);
         }
         public static bool isRoundWin(GameState game)
         {
             if (game.CurrentComputerPoints >= game.CurrentPlayerPoints)
+            {
                 game.isPlayerWin = false;
+                game.canPlayerDraw = false;
+            }
+            else if (game.CurrentComputerPoints < game.CurrentPlayerPoints)
+            {
+                game.isPlayerWin = true;
+                game.canPlayerDraw = false;
+            }
 
             if (game.isPlayerWin)
             {
-                resetGame(game);
                 game.Player.chips += (game.Player.multiplier * game.bet);
                 return true;
             }
-            resetGame(game);
+            game.bet = 0;
+            game.CurrentPlayerPoints = 0;
+            game.CurrentComputerPoints = 0;
             return false;
         }
-        public static void resetGame(GameState game)
+        public IActionResult Reset()
         {
-            game.bet = 0;
-            game.CurrentPlayerHand.Clear();
-            game.CurrentPlayerPoints = 0;
-            game.CurrentCompHand.Clear();
-            game.CurrentComputerPoints = 0;
-            game.CompAces = 0;
-            game.Player.aces = 0;
+            _gameState.resetGame();
+            return View("GameView", _gameState);
+        }
+        public IActionResult statRefresh()
+        {
+            return PartialView("Stats", _gameState);
+        }
+        public IActionResult PlayerAreaRefresh()
+        {
+            return PartialView("PlayerHand", _gameState);
+        }
+        public IActionResult ComputerAreaRefresh()
+        {
+            return PartialView("ComputerHand", _gameState);
+        }
+        public IActionResult PlaceBet(int amount)
+        {
+            if (amount <= 0)
+                return BadRequest("Invalid bet");
+
+            _gameState.bet = amount;
+            _gameState.Player.chips -= amount;
+
+            return Ok();
         }
     }
 }
