@@ -10,6 +10,7 @@
     }
     document.getElementById("standButton").disabled = false;
     await loadPartial('/Deck/statRefresh', "statDiv");
+    //await loadPartial('/Deck/computerAreaRefresh', "comp-area");
 }
 
 async function stand() {
