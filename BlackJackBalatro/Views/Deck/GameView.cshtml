@@ -3,7 +3,9 @@
 }
 @model BlackJackBalatro.Services.GameState
 <div id="GameView"  class="text-center">
-    <h1>BlackJack</h1>
+    <div id="inventory">
+        @await Html.PartialAsync("Inventory", @Model);
+    </div>
     <div id="game-area">
         <div id="play-area">
             @if((@Model.NormalDeck.Count + @Model.BonusDeck.Count + @Model.EvilDeck.Count < 10) || @Model.Player.chips < 1){
@@ -38,12 +40,9 @@
          }
         </div>
         
-
-        <div id="inventory">
-            @await Html.PartialAsync("Inventory", @Model);
-        </div>
         <div id="stat-area">
             @await Html.PartialAsync("Stats", @Model);
         </div>
+       </div>
 
 </div>

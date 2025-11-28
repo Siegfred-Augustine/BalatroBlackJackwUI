@@ -49,6 +49,9 @@ wwwroot\assets\King_of_Clubs.png
 wwwroot\assets\King_of_Diamonds.png
 wwwroot\assets\King_of_Hearts.png
 wwwroot\assets\King_of_Spades.png
+wwwroot\assets\leather_bg.jpg
+wwwroot\assets\mainbg.jpg
+wwwroot\assets\outertable.jpg
 wwwroot\assets\Queen_of_Clubs.png
 wwwroot\assets\Queen_of_Diamonds.png
 wwwroot\assets\Queen_of_Hearts.png

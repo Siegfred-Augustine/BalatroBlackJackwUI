@@ -4,27 +4,28 @@
 @{
 }
 @model BlackJackBalatro.Services.GameState
-<div id="statDiv" >
+<div id="statDiv">
     <div id="innerstat" data-bet="@Model.bet" data-chips="@Model.Player.chips">
-    <h2>Stats</h2>
 
-    <label>Name: @Model.Player.name</label><br />
-    <label>Chips: @Model.Player.chips</label><br />
-    <label>Multiplier: @Model.Player.multiplier</label><br />
-    <label>CurrentPoints: @Model.CurrentPlayerPoints</label><br />
-    <label>CurrentComPoints: @Model.CurrentComputerPoints</label><br />
-    <label>Card Draws: @Model.Player.cardDraws</label><br />
-    <label>Special Draws: @Model.Player.specialDraws</label><br />
-    <label>Evil Draws: @Model.Player.evilDraws</label><br />
-    <label>Mystery Draws: @Model.Player.mysteryDraws</label><br />
-    <label>Black Jacks: @Model.Player.blackJacks</label><br />
-    <label>Round Bet: @Model.bet</label><br />
-        <label>Busts: @Model.Player.busts</label><br />
+        <h3>Player Stats</h3>
+        <div class="stat-row"><span>Name:</span> <span>@Model.Player.name</span></div>
+        <div class="stat-row"><span>Chips:</span> <span>@Model.Player.chips</span></div>
+        <div class="stat-row"><span>Multiplier:</span> <span>@Model.Player.multiplier</span></div>
+        <div class="stat-row"><span>Points:</span> <span>@Model.CurrentPlayerPoints</span></div>
+        <div class="stat-row"><span>Computer:</span> <span>@Model.CurrentComputerPoints</span></div>
 
-    <br />
-        <label>Normal Deck: @Model.NormalDeck.Count</label><br />
-        <label>Evil Deck: @Model.EvilDeck.Count</label><br />    
-        <label>Bonus Deck: @Model.BonusDeck.Count</label><br />
-    
-</div>
+        <h4>Draw Stats</h4>
+        <div class="stat-row"><span>Card Draws:</span> <span>@Model.Player.cardDraws</span></div>
+        <div class="stat-row"><span>Special Draws:</span> <span>@Model.Player.specialDraws</span></div>
+        <div class="stat-row"><span>Evil Draws:</span> <span>@Model.Player.evilDraws</span></div>
+        <div class="stat-row"><span>Mystery Draws:</span> <span>@Model.Player.mysteryDraws</span></div>
+        <div class="stat-row"><span>Black Jacks:</span> <span>@Model.Player.blackJacks</span></div>
+        <div class="stat-row"><span>Busts:</span> <span>@Model.Player.busts</span></div>
+
+        <h4>Decks</h4>
+        <div class="stat-row"><span>Normal Deck:</span> <span>@Model.NormalDeck.Count</span></div>
+        <div class="stat-row"><span>Evil Deck:</span> <span>@Model.EvilDeck.Count</span></div>
+        <div class="stat-row"><span>Bonus Deck:</span> <span>@Model.BonusDeck.Count</span></div>
+
+    </div>
 </div>
