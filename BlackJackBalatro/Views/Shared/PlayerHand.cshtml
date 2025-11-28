@@ -5,35 +5,41 @@
 }
 @model BlackJackBalatro.Services.GameState
 <div id="player-hand">
-    <h2>Player</h2>
-    <div class="card-container">
-    @foreach(Card card in @Model.CurrentPlayerHand)
-    {
-            var url = Url.Content("~/assets/"+card.value + "_of_" + card.suite +".png");
-            <div class="card" style="background-image: url('@url')">
+    <div id="player-container">
+        <div class="card-container">
+        @foreach(Card card in @Model.CurrentPlayerHand)
+        {
+                var url = Url.Content("~/assets/"+card.value + "_of_" + card.suite +".png");
+                <div class="card @card.rarity" style="background-image: url('@url')">
+            </div>
+        }
         </div>
-    }
+        <div>
+            <h2>Player</h2><br />
+        </div>
     </div>
-    @if(@Model.NormalDeck.Count < 1){
-        <button id="norm" onclick="drawCard('PlayerNormalDraw')" disabled>Normal</button>
-    }else{
-        <button id="norm" onclick="drawCard('PlayerNormalDraw')">Normal</button>
-    }
-    @if(@Model.EvilDeck.Count < 1){
-        <button id="evil" onclick="drawCard('PlayerEvilDraw')" disabled>Evil</button>
-    }else{
-        <button id="evil" onclick="drawCard('PlayerEvilDraw')">Evil</button>
-    }
-    @if(@Model.BonusDeck.Count < 1){
-        <button id="bonus" onclick="drawCard('PlayerBonusDraw')" disabled>Bonus</button><br />
-    }else{
-        <button id="bonus" onclick="drawCard('PlayerBonusDraw')">Bonus</button><br />
-    }
-   
-    <input id="betInput" type="number" placeholder="0" /><button id="betBtn" onclick="placeBet()">Enter Bet</button>
-        
 
-    <script >
-
-    </script>
+    <div id="button-area">
+        <div id="button-grp">
+            @if(@Model.NormalDeck.Count < 1){
+                <button class="innerbtn" id="norm" onclick="drawCard('PlayerNormalDraw')" disabled><img src="/assets/redCard.jpg" /></button>
+            }else{
+                <button class="innerbtn" id="norm" onclick="drawCard('PlayerNormalDraw')"><img src="/assets/redCard.jpg" /></button>
+            }
+            @if(@Model.EvilDeck.Count < 1){
+                <button class="innerbtn" id="evil" onclick="drawCard('PlayerEvilDraw')" disabled><img src="/assets/blueCard.jpg" /></button>
+            }else{
+                <button class="innerbtn" id="evil" onclick="drawCard('PlayerEvilDraw')"><img src="/assets/blueCard.jpg" /></button>
+            }
+            @if(@Model.BonusDeck.Count < 1){
+                <button class="innerbtn" id="bonus" onclick="drawCard('PlayerBonusDraw')" disabled><img src="/assets/greenCard.jpg" /></button><br />
+            }else{
+                <button class="innerbtn" id="bonus" onclick="drawCard('PlayerBonusDraw')"><img src="/assets/greenCard.jpg" /></button><br />
+            }
+        </div>
+        <div>
+            <input id="betInput" type="number" placeholder="0" /><button id="betBtn" onclick="placeBet()">Enter Bet</button>
+        </div>
+    </div>
+    
 </div>

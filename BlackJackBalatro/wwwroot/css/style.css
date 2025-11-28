@@ -15,19 +15,25 @@
     display: flex;
     flex-direction: column;
     height: 75vh;
+    background-image: url('/assets/table.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #comp-area {
     border: solid 2px;
     border-color: yellow;
-    height:50%;
+    height: 50%;
 }
+
 #player-area {
     border: solid 2px;
     border-color: orange;
     height: 50%;
     padding: 20px;
 }
+
 #inventory {
     border: solid 2px;
     border-color: blue;
@@ -45,12 +51,18 @@
     margin: 10px;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-
-    background-size: contain; 
+    
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.card:hover{
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 0 15px 4px currentColor;
+}
+
 .card-container {
 
     border: 2px solid lightblue;
@@ -59,16 +71,106 @@
     align-items: center; 
     gap: 10px; 
     flex-wrap: wrap;
+    width:100%;
 }
 
-.card.boring{
-
+.card.Boring {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    animation: none;
 }
 
-.card.special{
-
+.card.Special {
+    box-shadow: 0 0 10px 3px rgba(0, 150, 255, 0.7);
+    border-color: rgba(0, 150, 255, 1);
 }
-.card.evil{
-
+.card.Evil {
+    box-shadow: 0 0 12px 4px rgba(150, 0, 0, 0.75);
+    border-color: rgba(180, 0, 0, 1);
+    filter: brightness(0.9);
 }
-.card.
+.card.IDK {
+    box-shadow: 0 0 15px 5px rgba(180, 0, 255, 0.8);
+    border-color: rgb(180, 0, 255);
+    filter: contrast(1.2);
+}
+.card.Bonus {
+    box-shadow: 0 0 12px 4px rgba(255, 220, 0, 0.75);
+    border-color: rgb(255, 220, 0);
+}
+
+.card.Special,
+.card.Evil,
+.card.IDK,
+.card.Bonus{
+    animation: subtle-shake 1.8s infinite ease-in-out;
+}
+
+@keyframes subtle-shake {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(1px, -1px) rotate(-0.5deg);
+    }
+
+    50% {
+        transform: translate(-1px, 1px) rotate(0.5deg);
+    }
+
+    75% {
+        transform: translate(1px, 1px) rotate(-0.3deg);
+    }
+
+    100% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+}
+
+#button-area{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#button-grp {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#player-hand{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction:row;
+}
+
+#player-container{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+}
+
+.innerbtn {
+    height: 90px;
+    width: 80px;
+    border: none;
+    background: none;
+    object-fit: cover;
+}
+
+.innerbtn:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 0 15px 4px currentColor;
+}
+
+.innerbtn:focus{
+    outline: none;
+}
+
+
+.innerbtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

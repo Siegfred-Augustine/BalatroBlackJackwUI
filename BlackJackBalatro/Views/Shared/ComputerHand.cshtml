@@ -11,7 +11,7 @@
         @foreach (Card card in @Model.CurrentCompHand)
         {
             var url = Url.Content("~/assets/" + card.value + "_of_" + card.suite + ".png");
-            <div class="card" style="background-image: url('@url')">
+            <div class="card @card.rarity" style="background-image: url('@url')">
             </div>
         }
     </div>

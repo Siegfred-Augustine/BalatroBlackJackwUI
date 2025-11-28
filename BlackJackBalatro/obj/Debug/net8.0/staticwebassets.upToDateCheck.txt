@@ -38,14 +38,13 @@ wwwroot\assets\Ace_of_Clubs.png
 wwwroot\assets\Ace_of_Diamonds.png
 wwwroot\assets\Ace_of_Hearts.png
 wwwroot\assets\Ace_of_Spades.png
-wwwroot\assets\blackCard.jpg
 wwwroot\assets\blueCard.jpg
 wwwroot\assets\greenCard.jpg
 wwwroot\assets\Jack_of_Clubs.png
 wwwroot\assets\Jack_of_Diamonds.png
 wwwroot\assets\Jack_of_Hearts.png
 wwwroot\assets\Jack_of_Spades.png
-wwwroot\assets\Joker.png
+wwwroot\assets\Joker_of_Blacks.png
 wwwroot\assets\King_of_Clubs.png
 wwwroot\assets\King_of_Diamonds.png
 wwwroot\assets\King_of_Hearts.png
@@ -54,7 +53,9 @@ wwwroot\assets\Queen_of_Clubs.png
 wwwroot\assets\Queen_of_Diamonds.png
 wwwroot\assets\Queen_of_Hearts.png
 wwwroot\assets\Queen_of_Spades.png
+wwwroot\assets\redCard.jpg
 wwwroot\assets\red_joker.png
+wwwroot\assets\table.jpg
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\scripts.js
