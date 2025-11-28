@@ -13,7 +13,7 @@
                 </div>
             }else{
 
-            <button id="start" onclick="gameStart()">Start Game</button>
+            <button class="action-btn" id="start" onclick="gameStart()">Start Game</button>
             <div id="comp-area">
                 @await Html.PartialAsync("Computerhand", @Model);
             </div>
@@ -34,17 +34,16 @@
                         @await Html.PartialAsync("LoseScreen", @Model);
                 }
              </div>
-            <button id="standButton" onclick="stand()">Stand</button>
+             <button class="action-btn" id="standButton" onclick="stand()">Stand</button>
          }
         </div>
         
-     <div>  
-            <div id="inventory">
-                @await Html.PartialAsync("Inventory", @Model);
-            </div>
-            <div id="stat-area">
-                @await Html.PartialAsync("Stats", @Model);
-            </div>
-            
-    </div>
+
+        <div id="inventory">
+            @await Html.PartialAsync("Inventory", @Model);
+        </div>
+        <div id="stat-area">
+            @await Html.PartialAsync("Stats", @Model);
+        </div>
+
 </div>
