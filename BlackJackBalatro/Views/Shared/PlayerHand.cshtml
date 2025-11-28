@@ -15,16 +15,31 @@
         </div>
     }
     </div>
-    <button id="norm" onclick="drawCard('PlayerNormalDraw')">Normal</button>
-    <button id="evil" onclick="drawCard('PlayerEvilDraw')">Evil</button>
-    <button id="bonus" onclick="drawCard('PlayerBonusDraw')">Bonus</button><br />
+    @if(@Model.NormalDeck.Count < 1){
+        <button id="norm" onclick="drawCard('PlayerNormalDraw')" disabled>Normal</button>
+    }else{
+        <button id="norm" onclick="drawCard('PlayerNormalDraw')">Normal</button>
+    }
+    @if(@Model.EvilDeck.Count < 1){
+        <button id="evil" onclick="drawCard('PlayerEvilDraw')" disabled>Evil</button>
+    }else{
+        <button id="evil" onclick="drawCard('PlayerEvilDraw')">Evil</button>
+    }
+    @if(@Model.BonusDeck.Count < 1){
+        <button id="bonus" onclick="drawCard('PlayerBonusDraw')" disabled>Bonus</button><br />
+    }else{
+        <button id="bonus" onclick="drawCard('PlayerBonusDraw')">Bonus</button><br />
+    }
+   
     <input id="betInput" type="number" placeholder="0" /><button id="betBtn" onclick="placeBet()">Enter Bet</button>
+        
 
     <script >
         async function placeBet() {
+            let chips = @Model.Player.chips;
             let amount = document.getElementById("betInput").value;
 
-            if (!amount || amount <= 0 || amount > @Model.Player.chips) {
+            if (!amount || amount <= 0 || amount > chips) {
                 alert("Enter a valid bet!");
                 return;
             }
@@ -33,7 +48,6 @@
 
             // Refresh Stats area
             await loadPartial(`/Deck/statRefresh`, "statDiv");
-            await loadPartial('/Deck')
 
             document.getElementById("betInput").disabled = true;
             document.getElementById("betBtn").disabled = true;

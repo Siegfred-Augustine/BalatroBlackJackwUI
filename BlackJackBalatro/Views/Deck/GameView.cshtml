@@ -23,7 +23,7 @@
                 {
                     @await Html.PartialAsync("WinScreen", @Model)
                 }
-                else if(!@Model.isPlayerWin && !@Model.canPlayerDraw )
+                else if(!@Model.isPlayerWin && !@Model.canPlayerDraw || (@Model.NormalDeck.Count + @Model.BonusDeck.Count + @Model.EvilDeck.Count < 10) || @Model.Player.chips < 1)
                 {
                         @await Html.PartialAsync("LoseScreen", @Model);
                 }
