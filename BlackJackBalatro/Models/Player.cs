@@ -15,14 +15,10 @@ namespace BlackJackBalatro.Models
         public int cardDraws = 0; //tracks total cards drawn by the player.
         public int evilDraws = 0; //tracks evil cards drawn.
         public int specialDraws = 0; //tracks special cards drawn.
+        public int bonusDraws = 0;
+        public int mysteryDraws = 0;
         public int multiplier = 2; //multiplier for chip rewards.
-        public int diamondDraws = 0; //can be added for a bonus.
-        public int heartDraws = 0; //can be added for a bonus.
-        public int spadeDraws = 0; //can be added for a bonus.
-        public int clubDraws = 0; //can be added for a bonus.
         public int currentRoundPoints = 0; //tracks current players' total hand
-        public int stands = 0; //calls out a player for being a coward.
-        public int highestRound = 0; //tracks a trigger minigame.
         public int blackJacks = 0; //triggers a special text.
         public int busts = 0; //triggers pity chips.
         public int notFollowingInstructions = 0; //triggers all in bet.

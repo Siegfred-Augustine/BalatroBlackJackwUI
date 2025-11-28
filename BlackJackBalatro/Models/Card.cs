@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using BlackJackBalatro.Services;
 
 namespace BlackJackBalatro.Models
 {
@@ -26,7 +27,7 @@ namespace BlackJackBalatro.Models
         public String suite { get; set; }
         public String value { get; set; }
         public eRarity rarity { get; set; }
-        public virtual void special(Player player, List<Card> normalDeck, List<Card> evilDeck, List<Card> bonusDeck) { }
+        public virtual void special(GameState state) { }
 
         public static String valueConverter(int value)
         {
@@ -58,7 +59,7 @@ namespace BlackJackBalatro.Models
             this.rarity = eRarity.Boring;
         }
 
-        public override void special(Player player, List<Card> normalDeck, List<Card> evilDeck, List<Card> bonusDeck)
+        public override void special(GameState state)
         {
             String[] messages =
             {
@@ -84,57 +85,57 @@ namespace BlackJackBalatro.Models
     }
     public class EvilCard : Card
     {
-        public void Action(int index, Player player, List<Card> normalDeck, List<Card> evilDeck, List<Card> bonusDeck) //Activates the cards' special effect based on the rarity
+        public void Action(int index, GameState state) //Activates the cards' special effect based on the rarity
         {
             switch (index)
             {
                 case 0://Adds Joker cards that will reduce a deck to 20 cards
                     for (int i = 0; i < 15; i++)
                     {
-                        evilDeck.Add(new EvilCard(eRarity.Evil, valueConverter(14), "Blacks"));
+                       state.EvilDeck.Add(new EvilCard(eRarity.Evil, valueConverter(14), "Blacks"));
                     }
                     break;
                 case 1:
-                    EvilCard.cardStealer(normalDeck);
+                    EvilCard.cardStealer(state.NormalDeck);
                     break;
                 case 2:
-                    if (player.multiplier < 1)
+                    if (state.Player.multiplier < 1)
                         break;
                     else
-                        player.multiplier--;
+                        state.Player.multiplier--;
                     break;
                 case 3:
-                    while (bonusDeck.Count != 0)
+                    while (state.BonusDeck.Count != 0)
                     {
-                        bonusDeck.RemoveAt(0);
+                        state.BonusDeck.RemoveAt(0);
                     }
                     break;
                 case 4:
-                    player.multiplier += 1;
+                    state.Player.multiplier += 1;
                     break;
                 case 5:
-                    evilDeck.Clear();
-                    EvilCard.initializeDeck(evilDeck);
+                    state.EvilDeck.Clear();
+                    EvilCard.initializeDeck(state.EvilDeck);
                     break;
                 case 6:
-                    normalDeck.Clear();
-                    NormalCard.initializeDeck(normalDeck);
+                    state.NormalDeck.Clear();
+                    NormalCard.initializeDeck(state.NormalDeck);
                     break;
                 case 7:
-                    BonusCard.initializeDeck(bonusDeck);
+                    BonusCard.initializeDeck(state.BonusDeck);
                     break;
                 case 8:
                     int rand = RNG.random.Next(2, 10);
                     for (int i = 0; i < rand; i++)
                     {
-                        normalDeck.Add(new NormalCard("Ace", "Spades"));
+                        state.NormalDeck.Add(new NormalCard("Ace", "Spades"));
                     }
                     break;
                 case 9:
-                    player.chips++;
+                    state.Player.chips++;
                     break;
                 case 10:
-                    player.storyLineTrigger = true;
+                    state.Player.storyLineTrigger = true;
                     break;
             }
         }
@@ -172,19 +173,19 @@ namespace BlackJackBalatro.Models
                 deck.Add(new EvilCard(evilRarityAssigner(), valueConverter(i + 1), "Clubs"));
             }
         }
-        public override void special(Player player, List<Card> normalDeck, List<Card> evilDeck, List<Card> bonusDeck)
+        public override void special(GameState state)
         {
             if (this.rarity == eRarity.Evil)
             {
-                Action(RNG.random.Next(4), player, normalDeck, evilDeck, bonusDeck);
+                Action(RNG.random.Next(4), state);
             }
             if (this.rarity == eRarity.Special)
             {
-                Action(RNG.random.Next(4, 10), player, normalDeck, evilDeck, bonusDeck);
+                Action(RNG.random.Next(4, 10), state);
             }
             if (this.rarity == eRarity.IDK)
             {
-                Action(10, player, normalDeck, evilDeck, bonusDeck);
+                Action(10, state);
             }
         }
         public static void cardStealer(List<Card> deck)
@@ -202,40 +203,40 @@ namespace BlackJackBalatro.Models
     }
     public class BonusCard : Card
     {
-        public void BonusAction(int index, Player player, List<Card> deck)
+        public void BonusAction(int index, GameState state)
         {
             switch (index)
             {
                 case 0:
-                    if (player.chips == 0)
+                    if (state.Player.chips == 0)
                     {
-                        player.chips += 2;
+                        state.Player.chips += 2;
                     }
                     else
                     {
-                        player.chips *= 2;
+                        state.Player.chips *= 2;
                     }
                     break;
                 case 1:
-                    player.chips += player.heartDraws + player.diamondDraws;
+                    state.Player.chips += state.Player.specialDraws + state.Player.evilDraws;
                     break;
                 case 2:
-                    player.chips += player.spadeDraws + player.clubDraws;
+                    state.Player.chips += state.Player.mysteryDraws + state.Player.cardDraws;
                     break;
                 case 3:
-                    player.chips += 200;
+                    state.Player.chips += 200;
                     break;
                 case 4:
-                    int pos = RNG.random.Next(player.availableItems.Count);
-                    if (player.availableItems.Count == 0)
+                    int pos = RNG.random.Next(state.Player.availableItems.Count);
+                    if (state.Player.availableItems.Count == 0)
                     {
                         break;
                     }
-                    Items item = player.availableItems[pos];
+                    Items item = state.Player.availableItems[pos];
 
-                    player.playerInventory.Add(item);
-                    player.availableItems.RemoveAt(pos);
-                    Items.itemTrigger(item, player);
+                    state.Player.playerInventory.Add(item);
+                    state.Player.availableItems.RemoveAt(pos);
+                    Items.itemTrigger(item, state.Player);
                     break;
             }
         }
@@ -255,7 +256,7 @@ namespace BlackJackBalatro.Models
                 deck.Add(new BonusCard(suites[RNG.random.Next(4)], valueConverter(RNG.random.Next(1, 14))));
             }
         }
-        public override void special(Player player, List<Card> normalDeck, List<Card> evilDeck, List<Card> bonusDeck)
+        public override void special(GameState state)
         {
             int balancer = RNG.random.Next(100);
             int range = 0;
@@ -270,7 +271,7 @@ namespace BlackJackBalatro.Models
                 range = 1;
             else if (balancer < 100)
                 range = 0;
-            BonusAction(range, player, bonusDeck);
+            BonusAction(range, state);
         }
 
     }

@@ -24,10 +24,13 @@ namespace BlackJackBalatro.Controllers
                 _gameState.isPlayerWin = false;
                 _gameState.canPlayerDraw = false;
                 _gameState.CurrentPlayerPoints = 0;
+                _gameState.Player.busts++;
             }
             else
             {
                 Card card = DrawLogic(_gameState.CurrentPlayerHand, _gameState.NormalDeck);
+                _gameState.Player.cardDraws++;
+                card.special(_gameState);
 
                 _gameState.AddPoints(card, true);
             }
@@ -35,8 +38,11 @@ namespace BlackJackBalatro.Controllers
             {
                 _gameState.isPlayerWin = false;
                 _gameState.canPlayerDraw = false;
+                _gameState.Player.busts++;
                 return PartialView("LoseScreen", _gameState);
             }
+            if (_gameState.CurrentPlayerPoints == 21)
+                _gameState.Player.blackJacks++;
             return PartialView("PlayerHand", _gameState);
         }
         public IActionResult PlayerEvilDraw()
@@ -45,18 +51,31 @@ namespace BlackJackBalatro.Controllers
             {
                 _gameState.isPlayerWin = false;
                 _gameState.CurrentPlayerPoints = 0;
+                _gameState.Player.busts++;
             }
             else
             {
                 Card card = DrawLogic(_gameState.CurrentPlayerHand, _gameState.EvilDeck);
                 _gameState.AddPoints(card, true);
+                _gameState.Player.cardDraws++;
+                card.special(_gameState);
+
+                switch (card.rarity)
+                {
+                    case eRarity.Evil: _gameState.Player.evilDraws++; break;
+                    case eRarity.Special: _gameState.Player.specialDraws++; break;
+                    default: _gameState.Player.mysteryDraws++; break;
+                }
             }
             if(_gameState.CurrentPlayerPoints > 21)
             {
                 _gameState.isPlayerWin = false;
                 _gameState.canPlayerDraw = false;
+                _gameState.Player.busts++;
                 return PartialView("LoseScreen", _gameState);
             }
+            if (_gameState.CurrentPlayerPoints == 21)
+                _gameState.Player.blackJacks++;
             return PartialView("PlayerHand", _gameState);
         }
         public IActionResult PlayerBonusDraw()
@@ -65,20 +84,26 @@ namespace BlackJackBalatro.Controllers
             {
                 _gameState.isPlayerWin = false;
                 _gameState.CurrentPlayerPoints = 0;
+                _gameState.Player.busts++;
             }
             else
             {
 
                 Card card = DrawLogic(_gameState.CurrentPlayerHand, _gameState.BonusDeck);
                 _gameState.AddPoints(card, true);
+                card.special(_gameState);
+                _gameState.Player.bonusDraws++;
             }
             if (_gameState.CurrentPlayerPoints > 21)
             {
                 _gameState.isPlayerWin = false;
                 _gameState.canPlayerDraw = false;
+                _gameState.Player.busts++;
                 return PartialView("LoseScreen", _gameState);
             }
-                
+            if (_gameState.CurrentPlayerPoints == 21)
+                _gameState.Player.blackJacks++;
+
             return PartialView("PlayerHand", _gameState);
         }
 
