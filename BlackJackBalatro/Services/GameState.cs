@@ -68,6 +68,8 @@ namespace BlackJackBalatro.Services
                     adder += 11;
                     break;
                 default:
+                    if (card.value == "Joker")
+                        return;
                     adder += int.Parse(card.value);
                     break;
             }
