@@ -36,10 +36,9 @@
 
     <script >
         async function placeBet() {
-            let chips = @Model.Player.chips;
             let amount = document.getElementById("betInput").value;
 
-            if (!amount || amount <= 0 || amount > chips) {
+            if (!amount || amount <= 0 || amount > @Model.Player.chips) {
                 alert("Enter a valid bet!");
                 return;
             }
