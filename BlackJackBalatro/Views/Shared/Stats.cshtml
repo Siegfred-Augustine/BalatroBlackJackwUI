@@ -5,7 +5,7 @@
 }
 @model BlackJackBalatro.Services.GameState
 <div id="statDiv" >
-    <div id="innerstat" data-bet="@Model.bet">
+    <div id="innerstat" data-bet="@Model.bet" data-chips="@Model.Player.chips">
     <h2>Stats</h2>
 
     <label>Name: @Model.Player.name</label><br />

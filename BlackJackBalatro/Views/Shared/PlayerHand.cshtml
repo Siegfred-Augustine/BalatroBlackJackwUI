@@ -35,21 +35,6 @@
         
 
     <script >
-        async function placeBet() {
-            let amount = document.getElementById("betInput").value;
 
-            if (!amount || amount <= 0 || amount > @Model.Player.chips) {
-                alert("Enter a valid bet!");
-                return;
-            }
-
-            const result = await fetch(`/Deck/PlaceBet?amount=${amount}`);
-
-            // Refresh Stats area
-            await loadPartial(`/Deck/statRefresh`, "statDiv");
-
-            document.getElementById("betInput").disabled = true;
-            document.getElementById("betBtn").disabled = true;
-        }
     </script>
 </div>

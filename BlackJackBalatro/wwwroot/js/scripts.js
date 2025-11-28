@@ -2,6 +2,7 @@
     document.getElementById("start").disabled = true;
 
     await fetch(`/Deck/Reset`);
+    
 
     for (let i = 0; i < 2; i++) {
 
@@ -79,4 +80,24 @@ function checkForLoseScreen() {
     if (loseScreen) {
         window.location.assign("/Deck/GameView");
     }
+}
+
+async function placeBet() {
+    const data = document.getElementById("innerstat");
+    const chips = parseInt(data.dataset.chips);
+
+    let amount = document.getElementById("betInput").value;
+
+    if (!amount || amount <= 0 || amount > chips) {
+        alert("Enter a valid bet!");
+        return;
+    }
+
+    const result = await fetch(`/Deck/PlaceBet?amount=${amount}`);
+
+    // Refresh Stats area
+    await loadPartial(`/Deck/statRefresh`, "statDiv");
+
+    document.getElementById("betInput").disabled = true;
+    document.getElementById("betBtn").disabled = true;
 }
