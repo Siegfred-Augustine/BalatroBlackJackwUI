@@ -90,14 +90,16 @@ namespace BlackJackBalatro.Models
             switch (index)
             {
                 case 0://Adds Joker cards that will reduce a deck to 20 cards
-                    for (int i = 0; i < 15; i++)
-                    {
-                       state.EvilDeck.Add(new EvilCard(eRarity.Evil, valueConverter(14), "Blacks"));
-                    }
-                    break;
-                case 1:
                     EvilCard.cardStealer(state.NormalDeck);
                     break;
+                    
+                case 1:
+                    for (int i = 0; i < 15; i++)
+                    {
+                        state.EvilDeck.Add(new EvilCard(eRarity.Evil, valueConverter(14), "Blacks"));
+                    }
+                    break;
+
                 case 2:
                     if (state.Player.multiplier < 1)
                         break;
@@ -175,9 +177,14 @@ namespace BlackJackBalatro.Models
         }
         public override void special(GameState state)
         {
+            if (this.value == "Joker")
+            {
+                Action(0, state);
+                return;
+            }
             if (this.rarity == eRarity.Evil)
             {
-                Action(RNG.random.Next(4), state);
+                Action(RNG.random.Next(1, 4), state);
             }
             if (this.rarity == eRarity.Special)
             {

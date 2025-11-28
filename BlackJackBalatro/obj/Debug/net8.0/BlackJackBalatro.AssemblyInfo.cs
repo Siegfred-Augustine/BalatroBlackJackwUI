@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlackJackBalatro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08c7dde590b3413f4307d5ee196fcd537d6d79a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ded9ac7e38ae3df5974d28773ce732e2725c62b")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlackJackBalatro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlackJackBalatro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

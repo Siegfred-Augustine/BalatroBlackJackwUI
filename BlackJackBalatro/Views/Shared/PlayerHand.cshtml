@@ -9,9 +9,8 @@
     <div class="card-container">
     @foreach(Card card in @Model.CurrentPlayerHand)
     {
-        <div class="card ">
-            <span class="value">@card.value of</span>
-            <span class="suite">@card.suite</span>
+            var url = Url.Content("~/assets/"+card.value + "_of_" + card.suite +".png");
+            <div class="card" style="background-image: url('@url')">
         </div>
     }
     </div>

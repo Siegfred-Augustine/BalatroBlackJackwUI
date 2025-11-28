@@ -38,7 +38,7 @@
     border-color: violet;
 }
 .card {
-    height: 100px;
+    height: 108px;
     width: 75px;
     border: 2px solid;
     border-color: black;
@@ -46,6 +46,10 @@
     justify-content: center;
     align-items: center;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .card-container {
 
@@ -56,3 +60,15 @@
     gap: 10px; 
     flex-wrap: wrap;
 }
+
+.card.boring{
+
+}
+
+.card.special{
+
+}
+.card.evil{
+
+}
+.card.

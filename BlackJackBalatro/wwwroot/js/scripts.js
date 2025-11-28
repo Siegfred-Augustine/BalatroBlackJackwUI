@@ -2,11 +2,9 @@
     document.getElementById("start").disabled = true;
 
     await fetch(`/Deck/Reset`);
-    
+    await loadPartial(`/Deck/ComputerDraw`, "comp-area");
 
     for (let i = 0; i < 2; i++) {
-
-        await loadPartial(`/Deck/ComputerDraw`, "comp-area");
         await loadPartial(`/Deck/PlayerNormalDraw`, "player-area");
     }
     document.getElementById("standButton").disabled = false;
