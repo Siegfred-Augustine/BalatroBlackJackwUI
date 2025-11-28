@@ -14,6 +14,13 @@
 }
 
 async function stand() {
+    const data = document.getElementById("innerstat");
+    const bet = parseInt(data.dataset.bet);
+
+    if (bet < 1) {
+        alert("Place a bet!");
+        return;
+    }
 
     await loadPartial(`/Deck/ComputerTurn`, "comp-area");
     await loadPartial('/Deck/statRefresh', "statDiv");
@@ -35,6 +42,14 @@ async function loadPartial(url, targetId) {
 }
 
 async function drawCard(action) {
+    const data = document.getElementById("innerstat");
+    const bet = parseInt(data.dataset.bet);
+
+    if (bet < 1) {
+        alert("Place a bet!");
+        return;
+    }
+
     const response = await fetch(`/Deck/${action}`);
     document.getElementById("player-area").innerHTML = await response.text();
 
