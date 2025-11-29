@@ -124,8 +124,13 @@ h1, h2 {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 .container {
+    border: 5px solid green;
+    width:100%;
 }
-
+#playBtn{
+    border-radius: 5px;
+    background-color: white;
+}
 #GameView{
     height: 100%;
     width: 100%;
