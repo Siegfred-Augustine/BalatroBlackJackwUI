@@ -16,6 +16,7 @@ namespace BlackJackBalatro.Services
         public bool isPlayerWin { get; set; }
         public bool canPlayerDraw { get; set; }
         public int bet { get; set; }
+        public int rounds { get; set; }
 
         public Player Player { get; set; }
 
@@ -32,6 +33,7 @@ namespace BlackJackBalatro.Services
             canPlayerDraw = true;
             isPlayerWin = false;
             bet = 0;
+            rounds = 0;
 
             NormalCard.initializeDeck(NormalDeck);
             EvilCard.initializeDeck(EvilDeck);

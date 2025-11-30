@@ -5,7 +5,7 @@
 }
 @model BlackJackBalatro.Services.GameState
 <div id="statDiv">
-    <div id="innerstat" data-bet="@Model.bet" data-chips="@Model.Player.chips">
+    <div id="innerstat" data-bet="@Model.bet" data-chips="@Model.Player.chips" data-rounds="@Model.rounds">
 
         <h3>Player Stats</h3>
         <div class="stat-row"><span>Name:</span> <span>@Model.Player.name</span></div>
@@ -13,6 +13,8 @@
         <div class="stat-row"><span>Multiplier:</span> <span>@Model.Player.multiplier</span></div>
         <div class="stat-row"><span>Points:</span> <span>@Model.CurrentPlayerPoints</span></div>
         <div class="stat-row"><span>Computer:</span> <span>@Model.CurrentComputerPoints</span></div>
+        <div class="stat-row"><span>Rounds Played:</span> <span>@Model.rounds</span></div>
+
 
         <h4>Draw Stats</h4>
         <div class="stat-row"><span>Card Draws:</span> <span>@Model.Player.cardDraws</span></div>

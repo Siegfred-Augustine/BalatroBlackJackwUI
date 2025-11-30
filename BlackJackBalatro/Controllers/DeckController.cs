@@ -170,6 +170,7 @@ namespace BlackJackBalatro.Controllers
         public IActionResult Reset()
         {
             _gameState.resetGame();
+            _gameState.rounds++;
             return View("GameView", _gameState);
         }
         public IActionResult statRefresh()
