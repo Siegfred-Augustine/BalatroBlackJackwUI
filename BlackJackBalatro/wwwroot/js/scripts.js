@@ -10,6 +10,7 @@
     document.getElementById("standButton").disabled = false;
     await loadPartial('/Deck/statRefresh', "statDiv");
     //await loadPartial('/Deck/computerAreaRefresh', "comp-area");
+    return;
 }
 
 async function stand() {
@@ -24,7 +25,6 @@ async function stand() {
     await loadPartial(`/Deck/ComputerTurn`, "comp-area");
     await loadPartial('/Deck/statRefresh', "statDiv");
 
-    window.location.assign("/Deck/GameView");
 
     document.getElementById("start").disabled = false;
     document.getElementById("standButton").disabled = true;
@@ -32,12 +32,17 @@ async function stand() {
     document.getElementById("evil").disabled = true;
     document.getElementById("bonus").disabled = true;
     document.getElementById("betInput").disabled = true;
+
+    window.location.assign("/Deck/GameView");
+
+    return;
 }
 
 async function loadPartial(url, targetId) {
     const response = await fetch(url);
     const html = await response.text();
     document.getElementById(targetId).innerHTML = html;
+    return;
 }
 
 async function drawCard(action) {
@@ -57,6 +62,7 @@ async function drawCard(action) {
 
     document.getElementById("betInput").disabled = true;
     document.getElementById("betBtn").disabled = true;
+    return;
 }
 
 window.onload = () => {
@@ -71,13 +77,15 @@ window.onload = () => {
 window.enableStartButton = function () {
     const btn = document.getElementById("start");
     if (btn) btn.disabled = false;
-
+    return;
 }
 function checkForLoseScreen() {
     const loseScreen = document.querySelector("#player-area #lose-screen");
     if (loseScreen) {
         window.location.assign("/Deck/GameView");
+        return;
     }
+    return;
 }
 
 async function placeBet() {
