@@ -4,39 +4,42 @@
 @{
 }
 @model BlackJackBalatro.Services.GameState
-<div>
-    <h2>Player</h2>
-    @foreach(Card card in @Model.CurrentPlayerHand)
-    {
-        <label>@card.value</label>
-        <label>@card.suite</label>
-
-        <label>@card.rarity</label>
-
-        <br />
-    }
-    <button id="norm" onclick="drawCard('PlayerNormalDraw')">Normal</button>
-    <button id="evil" onclick="drawCard('PlayerEvilDraw')">Evil</button>
-    <button id="bonus" onclick="drawCard('PlayerBonusDraw')">Bonus</button><br />
-    <input id="betInput" type="number" placeholder="0" /><button id="betBtn" onclick="placeBet()">Enter Bet</button>
-
-    <script >
-        async function placeBet() {
-            let amount = document.getElementById("betInput").value;
-
-            if (!amount || amount <= 0 || amount > @Model.Player.chips) {
-                alert("Enter a valid bet!");
-                return;
-            }
-
-            const result = await fetch(`/Deck/PlaceBet?amount=${amount}`);
-
-            // Refresh Stats area
-            await loadPartial(`/Deck/statRefresh`, "statDiv");
-            await loadPartial('/Deck')
-
-            document.getElementById("betInput").disabled = true;
-            document.getElementById("betBtn").disabled = true;
+<div id="player-hand">
+    <div id="player-container">
+        <div class="card-container">
+        @foreach(Card card in @Model.CurrentPlayerHand)
+        {
+                var url = Url.Content("~/assets/"+card.value + "_of_" + card.suite +".png");
+                <div class="card @card.rarity" style="background-image: url('@url')">
+            </div>
         }
-    </script>
+        </div>
+        <div>
+            <h2>Player</h2><br />
+        </div>
+    </div>
+
+    <div id="button-area">
+        <div id="button-grp">
+            @if(@Model.NormalDeck.Count < 1){
+                <button class="innerbtn" id="norm" onclick="drawCard('PlayerNormalDraw')" disabled><img src="/assets/redCard.jpg" /></button>
+            }else{
+                <button class="innerbtn" id="norm" onclick="drawCard('PlayerNormalDraw')"><img src="/assets/redCard.jpg" /></button>
+            }
+            @if(@Model.EvilDeck.Count < 1){
+                <button class="innerbtn" id="evil" onclick="drawCard('PlayerEvilDraw')" disabled><img src="/assets/blueCard.jpg" /></button>
+            }else{
+                <button class="innerbtn" id="evil" onclick="drawCard('PlayerEvilDraw')"><img src="/assets/blueCard.jpg" /></button>
+            }
+            @if(@Model.BonusDeck.Count < 1){
+                <button class="innerbtn" id="bonus" onclick="drawCard('PlayerBonusDraw')" disabled><img src="/assets/greenCard.jpg" /></button><br />
+            }else{
+                <button class="innerbtn" id="bonus" onclick="drawCard('PlayerBonusDraw')"><img src="/assets/greenCard.jpg" /></button><br />
+            }
+        </div>
+        <div style="gap: 5px;">
+            <input id="betInput" type="number" placeholder="0" style="margin: 5px;" /><button class="action-btn" id="betBtn" onclick="placeBet()">Enter Bet</button>
+        </div>
+    </div>
+    
 </div>

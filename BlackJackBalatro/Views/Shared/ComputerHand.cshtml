@@ -6,10 +6,14 @@
 @model BlackJackBalatro.Services.GameState
 <div>
     <h2>Computer</h2>
-    @foreach (Card card in @Model.CurrentCompHand)
-    {
-        <label>@card.value</label>
-        <label>@card.suite</label>
-        <label>@card.rarity</label><br />
-    }
+  
+    <div class="card-container">
+        @foreach (Card card in @Model.CurrentCompHand)
+        {
+            var url = Url.Content("~/assets/" + card.value + "_of_" + card.suite + ".png");
+            <div class="card @card.rarity" style="background-image: url('@url')">
+            </div>
+        }
+    </div>
+    
 </div>

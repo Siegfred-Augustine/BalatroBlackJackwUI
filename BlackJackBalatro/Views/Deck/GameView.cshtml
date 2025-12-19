@@ -2,12 +2,17 @@
     ViewData["Title"] = "BBJ";
 }
 @model BlackJackBalatro.Services.GameState
-
-<div id="GameView" class="text-center">
-    <h1 class="display-4">Game</h1>
+<div id="GameView"  class="text-center">
     <div id="game-area">
         <div id="play-area">
-            <button id="start" onclick="gameStart()">Start Game</button>
+            @if(@Model.NormalDeck.Count  < 10 || @Model.Player.chips < 1){
+                <div>
+                    <h1>Game Over</h1><br />
+                    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+                </div>
+            }else{
+
+            <button class="action-btn" id="start" onclick="gameStart()">Start Game</button>
             <div id="comp-area">
                 @await Html.PartialAsync("Computerhand", @Model);
             </div>
@@ -23,21 +28,21 @@
                 {
                     @await Html.PartialAsync("WinScreen", @Model)
                 }
-                else if(!@Model.isPlayerWin && !@Model.canPlayerDraw )
+                else if((!@Model.isPlayerWin && !@Model.canPlayerDraw))
                 {
                         @await Html.PartialAsync("LoseScreen", @Model);
                 }
              </div>
-            <button id="standButton" onclick="stand()">Stand</button>
+             <button class="action-btn" id="standButton" onclick="stand()">Stand</button>
+         }
         </div>
         
-            <div id="inventory">
-                @await Html.PartialAsync("Inventory", @Model);
-            </div>
-            <div id="stat-area">
-                @await Html.PartialAsync("Stats", @Model);
-            </div>
+        <div id="stat-area">
+            @await Html.PartialAsync("Stats", @Model);
+        </div>
+       </div>
+    <div id="inventory">
+        @await Html.PartialAsync("Inventory", @Model);
     </div>
+
 </div>
-<script src="~/js/scripts.js" asp-append-version="true">
-</script>
